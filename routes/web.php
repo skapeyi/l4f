@@ -15,8 +15,6 @@ Route::get('/','Auth\LoginController@showLoginForm');
 
 Auth::routes();
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Sms Routes
@@ -30,13 +28,14 @@ Route::get('/outgoingsmsdata','SmsController@outgoing_messages');
 Route::post('/ait_sms_callback','SmsController@ait_sms_callback');
 Route::post('/send_sms', 'SmsController@send_sms');
 
-
 /*
 |--------------------------------------------------------------------------
 | Voice Routes
 |--------------------------------------------------------------------------
 */
 Route::get('/call-logs', 'VoiceController@index');
+Route::get('/callsdata','VoiceController@voices');
+Route::post('/savecalldata', 'VoiceController@store');
 
 /*
 |--------------------------------------------------------------------------
