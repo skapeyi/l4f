@@ -22,7 +22,11 @@ Auth::routes();
 | Sms Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/home', 'SmsController@index');
+Route::get('/home', 'SmsController@incoming');
+Route::get('/sms-incoming','SmsController@incoming');
+Route::get('/incomingsmsdata','SmsController@incoming_messages');
+Route::get('/sms-ougoing','SmsController@outgoing');
+Route::get('/outgoingsmsdata','SmsController@outgoing_messages');
 Route::post('/ait_sms_callback','SmsController@ait_sms_callback');
 
 
