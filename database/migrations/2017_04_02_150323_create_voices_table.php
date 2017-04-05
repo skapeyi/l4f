@@ -14,8 +14,8 @@ class CreateVoicesTable extends Migration
     public function up()
     {
         Schema::create('voices', function (Blueprint $table) {
-            $table->increments('id');
             $table->engine = 'InnoDB';
+            $table->increments('id');
             $table->string('name');
             $table->string('subject');
             $table->string('phone',12)->nullable();
