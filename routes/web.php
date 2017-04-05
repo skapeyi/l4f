@@ -28,6 +28,7 @@ Route::get('/incomingsmsdata','SmsController@incoming_messages');
 Route::get('/sms-ougoing','SmsController@outgoing');
 Route::get('/outgoingsmsdata','SmsController@outgoing_messages');
 Route::post('/ait_sms_callback','SmsController@ait_sms_callback');
+Route::post('/send_sms', 'SmsController@send_sms');
 
 
 /*
