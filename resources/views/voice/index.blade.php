@@ -20,6 +20,7 @@
                 <th>Age</th>
                 <th>Reason</th>
                 <th>Response</th>
+                <th>Status</th>
                 <th>Created on</th>
               </tr>
             </thead>
@@ -79,7 +80,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('reason', 'Reason for Calling') !!}
-                        {!! Form::textarea('message', '',['class' => 'form-control']) !!}
+                        {!! Form::textarea('reason', '',['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('response', 'Your Response') !!}
@@ -88,7 +89,7 @@
 
                     <div class="form-group">
                         {!! Form::label('status', 'Status') !!}
-                        <select class="form-control" id="status" name="category">
+                        <select class="form-control" id="status" name="status">
                             <option value="Closed">Closed </option>
                             <option value="Follow-up">Follow Up </option>
                             <option value="Open">Open </option>
@@ -125,6 +126,7 @@
             { data: 'age_bracket', name: 'age_bracket' },
             { data: 'reason', name: 'reason' },
             { data: 'response', name: 'response' },
+            { data: 'status', name: 'status' },
             { data: 'created_at', name: 'created_at' },
           ]
         });
