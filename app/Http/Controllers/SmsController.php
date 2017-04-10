@@ -69,22 +69,48 @@ class SmsController extends Controller
     public function send_bulk_sms(Request $request){
       $username   = env('AIT_USERNAME');
       $apikey     = env('AIT_KEY');
+      $recipients = "";
 
       if ($request->hasFile('import_file')){
         $path = $request->file('import_file')->getRealPath();
 			  $data = Excel::load($path, function($reader) {})->get();
 
-        Log::info($data,'success');
 			  if(!empty($data)){
           foreach ($data->toArray() as $key => $value) {
             if(!empty($value)){
               foreach ($value as $v) {
-
+                $recipients = $recipients.',+256'.$v['phone'];
               }
             }
           }
         }
+        $recipients = substr($recipients, 1);
+        Log::info($recipients);
+        $message = $request->message;
 
+        $gateway    = new AfricasTalkingGateway($username, $apikey);
+        $results = $gateway->sendMessage($recipients, $message);
+
+        foreach($results as $result) {
+          $sms = Sms::create([
+            'from' => 'l4f',
+            'to' => $result->number,
+            'text' => $request->message,
+            'type' => 'outgoing',
+            'status' => $result->status,
+            'message_id' => $result->messageId,
+            'cost' => $result->cost
+          ]);
+        }
+
+
+
+        return redirect('/sms-ougoing');
+
+      }
+      else{
+        flash("No file attached saved","success");
+        return redirect('/sms-ougoing');
       }
     }
 
