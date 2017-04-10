@@ -41,7 +41,7 @@ class SmsController extends Controller
 
     public function ait_delivery_callback(Request $request){
       Log::info($request);
-      $message = Sms::where(['message_id' => $request['message_id']]);
+      $message = Sms::where(['message_id' => $request['message_id']])->get();
       $message->status = $request['status'];
       $message->save();
     }
