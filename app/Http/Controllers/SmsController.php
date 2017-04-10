@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Datatables;
+use Log;
+use Excel;
 use App\Sms;
+use Datatables;
 use App\Http\Controllers\AfricasTalkingGateway;
 use Illuminate\Http\Request;
-use Log;
 
 class SmsController extends Controller
 {
@@ -63,6 +64,28 @@ class SmsController extends Controller
 
 
       return redirect('/sms-ougoing');
+    }
+
+    public function send_bulk_sms(Request $request){
+      $username   = env('AIT_USERNAME');
+      $apikey     = env('AIT_KEY');
+
+      if ($request->hasFile('import_file')){
+        $path = $request->file('import_file')->getRealPath();
+			  $data = Excel::load($path, function($reader) {})->get();
+
+        Log::info($data,'success');
+			  if(!empty($data)){
+          foreach ($data->toArray() as $key => $value) {
+            if(!empty($value)){
+              foreach ($value as $v) {
+
+              }
+            }
+          }
+        }
+
+      }
     }
 
     public function show($id){

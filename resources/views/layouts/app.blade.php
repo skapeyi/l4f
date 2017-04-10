@@ -108,7 +108,7 @@
               <ul class="nav nav-sidebar">
                   <li><a href="/sms-incoming">Incoming Sms</a></li>
                   <li><a href="/sms-ougoing">Outgoing Sms</a></li>
-                  <li><a href="/call-logs">Voice Logs</a></li>
+                  <!-- <li><a href="/call-logs">Voice Logs</a></li> -->
                   <li><a href="/access-logs">Access Logs</a></li>
                   <li><a href="/users">Users</a></li>
               </ul>
