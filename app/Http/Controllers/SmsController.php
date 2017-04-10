@@ -39,6 +39,13 @@ class SmsController extends Controller
       ]);
     }
 
+    public function ait_delivery_callback(Request $request){
+      Log::info($request);
+      $message = Sms::where(['message_id' => $request['message_id']]);
+      $message->status = $request['status'];
+      $message->save();
+    }
+
     public function send_sms(Request $request){
       $username   = env('AIT_USERNAME');
       $apikey     = env('AIT_KEY');
