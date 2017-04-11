@@ -5,8 +5,10 @@ use Log;
 use Excel;
 use App\Sms;
 use Datatables;
-use App\Http\Controllers\AfricasTalkingGateway;
+use App\BulkLog;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AfricasTalkingGateway;
+
 
 class SmsController extends Controller
 {
@@ -92,8 +94,12 @@ class SmsController extends Controller
           }
         }
         $recipients = substr($recipients, 1);
-        Log::info($recipients);
         $message = $request->message;
+
+        $log = new BulkLog();
+        $log->message = $message;
+        $log->recipients = $recipients;
+        $log->save();
 
         $gateway    = new AfricasTalkingGateway($username, $apikey);
         $results = $gateway->sendMessage($recipients, $message);
