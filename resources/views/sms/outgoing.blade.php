@@ -28,7 +28,43 @@
 
     </div>
 
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">New Message</h4>
+                </div>
+                <div class="modal-body">
+                    {!! Form::open(['action' => 'SmsController@send_sms']) !!}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="form-group">
+                        {!! Form::label('telephone', 'Telephone') !!}
+                        {!! Form::text('telephone', '',['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('message', 'Message') !!}
+                        {!! Form::textarea('message', '',['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            Send SMS
+                        </button>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <!-- Bulk SMS Modal -->
     <div id="bulkModal" class="modal fade" role="dialog">
@@ -53,10 +89,11 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" onClick = "form_submit()" class="btn btn-primary">
+                        <button type="submit"  class="btn btn-primary">
                             Send SMS
                         </button>
                     </div>
+                    {!! Form::close() !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

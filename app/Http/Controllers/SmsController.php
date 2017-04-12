@@ -53,7 +53,15 @@ class SmsController extends Controller
       $apikey     = env('AIT_KEY');
 
       $recipients = $request->telephone;
+      $recipients = substr($recipients,1);
+      $recipients = "+256".$recipients;
+      Log::info($recipients);
       $message = $request->message;
+
+      $log = new BulkLog();
+      $log->message = $message;
+      $log->recipients = $recipients;
+      $log->save();
 
       $gateway    = new AfricasTalkingGateway($username, $apikey);
       $results = $gateway->sendMessage($recipients, $message);
