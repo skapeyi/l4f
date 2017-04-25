@@ -10,7 +10,6 @@
               <tr>
                 <th>From</th>
                 <th>Text</th>
-                <th>Action</th>
                 <th>Date</th>
               </tr>
             </thead>
@@ -30,9 +29,7 @@
           columns: [
             { data: 'from', name: 'from' },
             { data: 'text', name: 'text' },
-            { data: 'status', name: 'status' },
             { data: 'date', name: 'date'}
-
           ]
         });
       });
