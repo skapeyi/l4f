@@ -91,8 +91,7 @@ class SmsController extends Controller
       if ($request->hasFile('import_file')){
         $path = $request->file('import_file')->getRealPath();
 			  $data = Excel::load($path, function($reader) {})->get();
-
-        Log::info($data);
+        
 			  if(!empty($data)){
           foreach ($data->toArray() as $key => $value) {
             if(!empty($value)){
