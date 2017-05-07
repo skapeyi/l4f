@@ -92,11 +92,16 @@ class SmsController extends Controller
         $path = $request->file('import_file')->getRealPath();
 			  $data = Excel::load($path, function($reader) {})->get();
 
+        Log::info($data);
 			  if(!empty($data)){
           foreach ($data->toArray() as $key => $value) {
             if(!empty($value)){
               foreach ($value as $v) {
-                $recipients = $recipients.',+256'.$v['phone'];
+                //Some cells can be empty, so we need to eliminate these.
+                if(strlen($v['phone'] >1)){
+                  $recipients = $recipients.',+256'.$v['phone'];
+                }
+                
               }
             }
           }
