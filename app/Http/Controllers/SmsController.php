@@ -155,7 +155,7 @@ class SmsController extends Controller
         $sms = Sms::create([
           'from' => 'l4f',
           'to' => $result->number,
-          'text' => $request->message,
+          'text' => $message,
           'type' => 'outgoing',
           'status' => $result->status,
           'message_id' => $result->messageId,
