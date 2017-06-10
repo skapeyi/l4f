@@ -39,6 +39,8 @@ class SmsController extends Controller
         'link_id' => $request->link_id,
         'type' => 'incoming'
       ]);
+
+      send_default_response($request->from);
     }
 
     public function ait_delivery_callback(Request $request){
@@ -77,8 +79,6 @@ class SmsController extends Controller
           'cost' => $result->cost
         ]);
       }
-
-
 
       return redirect('/sms-ougoing');
     }
@@ -140,6 +140,29 @@ class SmsController extends Controller
     }
 
     public function show($id){
+
+    }
+
+    public function send_default_response($number){
+      $username   = env('AIT_USERNAME');
+      $apikey     = env('AIT_KEY');
+      $message = "Apwoyo cwalo message Odwogo boti acegi-ni";
+
+
+      $gateway    = new AfricasTalkingGateway($username, $apikey);
+      $results = $gateway->sendMessage($number, $message);
+
+      foreach($results as $result) {
+        $sms = Sms::create([
+          'from' => 'l4f',
+          'to' => $result->number,
+          'text' => $request->message,
+          'type' => 'outgoing',
+          'status' => $result->status,
+          'message_id' => $result->messageId,
+          'cost' => $result->cost
+        ]);
+      }
 
     }
 }
