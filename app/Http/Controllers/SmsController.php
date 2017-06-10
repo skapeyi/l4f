@@ -18,7 +18,7 @@ class SmsController extends Controller
     }
 
     public function incoming_messages(){
-      return Datatables::of(Sms::where(['type' => 'incoming']))->orderBy('id','desc')->make(true);
+      return Datatables::of(Sms::where(['type' => 'incoming']))->orderBy('id','DESC')->make(true);
     }
 
     public function outgoing(){
@@ -26,7 +26,7 @@ class SmsController extends Controller
     }
 
     public function outgoing_messages(){
-      return Datatables::of(Sms::where(['type' => 'outgoing']))->orderBy('id','desc')->make(true);
+      return Datatables::of(Sms::where(['type' => 'outgoing']))->orderBy('id','DESC')->make(true);
     }
 
     public function ait_sms_callback(Request $request){
@@ -40,7 +40,7 @@ class SmsController extends Controller
         'type' => 'incoming'
       ]);
 
-      send_default_response($request->from);
+      self::send_default_response($request->from);
     }
 
     public function ait_delivery_callback(Request $request){
@@ -144,14 +144,13 @@ class SmsController extends Controller
     }
 
     public function send_default_response($number){
+      $message = "Apwoyo cwalo message Odwogo boti acegi-ni.";
+      $recipients = $number;
       $username   = env('AIT_USERNAME');
       $apikey     = env('AIT_KEY');
-      $message = "Apwoyo cwalo message Odwogo boti acegi-ni";
-
 
       $gateway    = new AfricasTalkingGateway($username, $apikey);
-      $results = $gateway->sendMessage($number, $message);
-
+      $results = $gateway->sendMessage($recipients, $message);
       foreach($results as $result) {
         $sms = Sms::create([
           'from' => 'l4f',
@@ -163,6 +162,5 @@ class SmsController extends Controller
           'cost' => $result->cost
         ]);
       }
-
     }
 }
