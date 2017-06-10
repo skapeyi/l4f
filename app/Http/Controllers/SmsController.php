@@ -18,7 +18,7 @@ class SmsController extends Controller
     }
 
     public function incoming_messages(){
-      return Datatables::of(Sms::where(['type' => 'incoming']))->make(true);
+      return Datatables::of(Sms::where(['type' => 'incoming']))->orderBy('id','desc')->make(true);
     }
 
     public function outgoing(){
@@ -26,7 +26,7 @@ class SmsController extends Controller
     }
 
     public function outgoing_messages(){
-      return Datatables::of(Sms::where(['type' => 'outgoing']))->make(true);
+      return Datatables::of(Sms::where(['type' => 'outgoing']))->orderBy('id','desc')->make(true);
     }
 
     public function ait_sms_callback(Request $request){

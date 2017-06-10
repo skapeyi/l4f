@@ -16,7 +16,7 @@ class VoiceController extends Controller
 
     public function voices(){
       //return Datatables::of(Voice)
-      return Datatables::of(Voice::query())->make(true);
+      return Datatables::of(Voice::query())->orderBy('id','desc')->make(true);
     }
 
     public function store(Request $request){
