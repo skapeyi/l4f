@@ -144,7 +144,7 @@ class SmsController extends Controller
     }
 
     public function send_default_response($number){
-      $message = "Apwoyo cwalo message Odwogo boti acegi-ni.";
+      $message = "Thank you for your question. We shall get back to you as soon as possible.";
       $recipients = $number;
       $username   = env('AIT_USERNAME');
       $apikey     = env('AIT_KEY');
