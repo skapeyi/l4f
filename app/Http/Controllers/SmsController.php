@@ -59,14 +59,14 @@ class SmsController extends Controller
       $recipients = "+256".$recipients;
       Log::info($recipients);
       $message = $request->message;
-
+      $from = "LF4";
       $log = new BulkLog();
       $log->message = $message;
       $log->recipients = $recipients;
       $log->save();
 
       $gateway    = new AfricasTalkingGateway($username, $apikey);
-      $results = $gateway->sendMessage($recipients, $message);
+      $results = $gateway->sendMessage($recipients, $message, $from);
 
       foreach($results as $result) {
         $sms = Sms::create([
@@ -107,14 +107,14 @@ class SmsController extends Controller
         }
         $recipients = substr($recipients, 1);
         $message = $request->message;
-
+        $from = "L4F";
         $log = new BulkLog();
         $log->message = $message;
         $log->recipients = $recipients;
         $log->save();
 
         $gateway    = new AfricasTalkingGateway($username, $apikey);
-        $results = $gateway->sendMessage($recipients, $message);
+        $results = $gateway->sendMessage($recipients, $message, $from);
 
         foreach($results as $result) {
           $sms = Sms::create([
@@ -148,9 +148,9 @@ class SmsController extends Controller
       $recipients = $number;
       $username   = env('AIT_USERNAME');
       $apikey     = env('AIT_KEY');
-
+      $from = "L4F";
       $gateway    = new AfricasTalkingGateway($username, $apikey);
-      $results = $gateway->sendMessage($recipients, $message);
+      $results = $gateway->sendMessage($recipients, $message, $from);
       foreach($results as $result) {
         $sms = Sms::create([
           'from' => 'l4f',
