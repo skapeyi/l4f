@@ -59,7 +59,7 @@ class SmsController extends Controller
       $recipients = "+256".$recipients;
       Log::info($recipients);
       $message = $request->message;
-      $from = "LF4";
+      $from = "L4F";
       $log = new BulkLog();
       $log->message = $message;
       $log->recipients = $recipients;
@@ -70,7 +70,7 @@ class SmsController extends Controller
 
       foreach($results as $result) {
         $sms = Sms::create([
-          'from' => 'l4f',
+          'from' => 'L4F',
           'to' => $result->number,
           'text' => $request->message,
           'type' => 'outgoing',
@@ -118,7 +118,7 @@ class SmsController extends Controller
 
         foreach($results as $result) {
           $sms = Sms::create([
-            'from' => 'l4f',
+            'from' => 'L4F',
             'to' => $result->number,
             'text' => $request->message,
             'type' => 'outgoing',
@@ -153,7 +153,7 @@ class SmsController extends Controller
       $results = $gateway->sendMessage($recipients, $message, $from);
       foreach($results as $result) {
         $sms = Sms::create([
-          'from' => 'l4f',
+          'from' => 'L4F',
           'to' => $result->number,
           'text' => $message,
           'type' => 'outgoing',
